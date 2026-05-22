@@ -1,4 +1,5 @@
 import dotenv from "dotenv";
+import { app } from "./app.js";
 dotenv.config({
     path:'./.env'
 })
@@ -8,6 +9,14 @@ console.log(process.env.MONGODB_URI)
 import connectDB from "./db/index.js";
 
 connectDB()
+.then(()=>{
+app.listen(process.env.PORT||8000,()=>{
+    console.log(`server is running at  port :${process.env.PORT}`);
+})
+})// jaise database connect to ye chala do since databe vala sync function hai to then lagate hai
+.catch((err)=>{
+    console.log("'MONGO db Connection failed !!!", err);
+})
 /*
 import express from "express"
 const app=express()
