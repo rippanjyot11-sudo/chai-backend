@@ -20,4 +20,14 @@ app.use(express.static("public"))
 
 app.use(cookieParser())
 
+// import routes
+import userRouter from './routes/user.routes.js'
+
+// routes decalration
+//app.use("/users",userRouter) // jb users pe jao to userrouter ko activate kro
+// for good practice
+app.use("/api/v1/users",userRouter)
+// http://localhost:8000/api/v1/users/register ye bnega  
+
+
 export { app }
