@@ -1,10 +1,14 @@
 import dotenv from "dotenv";
-import { app } from "./app.js";
 dotenv.config({
     path:'./.env'
 })
-
+import { configureCloudinary } from "./utils/cloudinary.js";
+configureCloudinary();
+import { app } from "./app.js";
 console.log(process.env.MONGODB_URI)
+console.log("ENV KEY:", process.env.CLOUDINARY_API_KEY);
+console.log("ENV SECRET:", process.env.CLOUDINARY_API_SECRET);
+console.log("ENV NAME:", process.env.CLOUDINARY_CLOUD_NAME);
 
 import connectDB from "./db/index.js";
 

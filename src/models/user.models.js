@@ -46,9 +46,8 @@ refreshTokens:{
   }
 );
 userSchema.pre("save", async function(next){
-    if(!this.isModified("password"))return next();
-    this.password=bcrypt.hash(this.password,10)
-    next()
+    if(!this.isModified("password"))return ;
+    this.password=await bcrypt.hash(this.password,10);
 })
 userSchema .methods.isPasswordCorrect=async function(password){
     return await bcrypt.compare(password,this.password)
@@ -67,7 +66,7 @@ userSchema.methods.generateAccessToken=function(){
         }
     )
 }
-userSchema.methods.generateAccessToken=function(){
+userSchema.methods.generateRefreshToken=function(){
     return jwt.sign( // ye return kr de jb bn jaye token to
         {
             _id:this._id,
